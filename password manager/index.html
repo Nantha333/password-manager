@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Password Manager</title>
+    <style>
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+    <h2>Password Manager</h2>
+    <input id="username" placeholder="Username"><br>
+    <input id="email" placeholder="Email"><br>
+    <input id="password" placeholder="Password"><br>
+    <button onclick="storeData()">Submit</button>
+    
+    <div id="output" class="hidden">
+        <h3>Stored Data</h3>
+        <ul id="list"></ul>
+    </div>
+
+    <script>
+        function storeData() {
+            let user = document.getElementById("username").value;
+            let mail = document.getElementById("email").value;
+            let pass = document.getElementById("password").value;
+
+            if (user && mail && pass) {
+                let item = document.createElement("li");
+                item.innerHTML = `Username: ${user} | Email: ${mail} | Password: <span class="hidden">${pass}</span> 
+                <button onclick="togglePass(this)">Show</button>`;
+                
+                document.getElementById("list").appendChild(item);
+                document.getElementById("output").classList.remove("hidden");
+            }
+        }
+
+        function togglePass(btn) {
+            let passSpan = btn.previousElementSibling;
+            passSpan.classList.toggle("hidden");
+            btn.textContent = passSpan.classList.contains("hidden") ? "Show" : "Hide";
+        }
+    </script>
+</body>
+</html>
